@@ -1,0 +1,28 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+
+                        <a routerLink="/products/{{tempProduct.id}}">
+                            <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                        </a>
+                        
+                        <a routerLink="/products/{{tempProduct.id}}">
+                            <h1>{{tempProduct.name}}</h1>
+                        </a>
+                        
+                        <div class="price">{{tempProduct.unitPrice | currency:'USD'}}</div>
+                        <a href="#" class="primary-btn">Add to Cart</a>
+                    </div>
+                </div>
+                <div *ngIf="products?.length==0" class="alert alert-warning col-md-12" role="alert"> 
+                    <!-- 这里的product是渲染值 -->
+                    <!-- ?.（安全导航操作符）：这个操作符用于防止在 null 或 undefined 的情况下访问对象属性时发生错误。如果 products 是 null 或 undefined，那么 products?.length 的计算结果也会是 null 或 undefined，而不会抛出错误。这对于异步数据加载的情况特别有用，因为数据可能还未加载完成。 -->
+                    No products found.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
