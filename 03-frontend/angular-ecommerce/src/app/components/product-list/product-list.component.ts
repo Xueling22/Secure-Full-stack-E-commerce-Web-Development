@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -19,7 +20,7 @@ export class ProductListComponent implements OnInit {
   thePageNumber: number = 1;
   thePageSize: number = 5;
   theTotalElements: number = 0;
-  previousKeyword: string = '';
+  previousKeyword: string = "";
 
   constructor(
     private productService: ProductService,
@@ -82,8 +83,8 @@ export class ProductListComponent implements OnInit {
       .subscribe(this.processResult());
   }
 
-  updatePageSize(pageSize: string) {
-    this.thePageSize = +pageSize;
+  updatePageSize(pageSize: number) {
+    this.thePageSize = pageSize;
     this.thePageNumber = 1;
     this.listProducts();
   }
@@ -95,5 +96,9 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     };
+  }
+
+  addToCart(theProduct:Product){
+    console.log("点了");
   }
 }

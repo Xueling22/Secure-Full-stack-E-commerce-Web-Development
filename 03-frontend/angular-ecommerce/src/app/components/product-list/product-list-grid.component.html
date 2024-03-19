@@ -14,7 +14,7 @@
                         </a>
                         
                         <div class="price">{{tempProduct.unitPrice | currency:'USD'}}</div>
-                        <a href="#" class="primary-btn">Add to Cart</a>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-small">Add to Cart</button>
                     </div>
                 </div>
                 <div *ngIf="products?.length==0" class="alert alert-warning col-md-12" role="alert"> 
@@ -37,14 +37,14 @@
                                                     [maxSize]="5"
                                                     [boundaryLinks]="true" 
                                                     (pageChange)="listProducts()">
-<!-- boundaryLinks首页尾页的快速链接，这些变量里面，前者是ngb自带的，后者是ts里面的 -->
                                     </ngb-pagination>
+                                    <!-- boundaryLinks首页尾页的快速链接，这些变量里面，前者是ngb自带的，后者是ts里面的 -->
                                 </div>
 
                                 <div class="col-md-3 mt-2" style="text-align: right;">
                                     <span class="mr-2">Page Size</span>
 
-                                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                                    <select #myPageSelect (change)="updatePageSize(+myPageSelect.value)">
                                         <option selected="true">5</option>
                                         <option>10</option>
                                         <option>20</option>
