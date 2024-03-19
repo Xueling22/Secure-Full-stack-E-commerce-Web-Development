@@ -67,6 +67,8 @@ export class ProductService {
       map((Response) => Response._embedded.products)
     );
   }
+  //这个Observable由HttpClient管理，当API响应到达时，HttpClient负责将响应体作为值发出。
+  //在这种场景下，不需要手动使用next来发射值，因为HttpClient已经处理了这部分逻辑
 
   getProduct(theProductId: number): Observable<Product> {
     //Observable<Product>是返回类型

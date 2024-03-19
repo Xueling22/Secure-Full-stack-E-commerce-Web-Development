@@ -16,17 +16,14 @@ export class CartService {
   addToCart(theCartItem:CartItem){
     //检查是否已经有了
     let alreadyExistsInCart:boolean=false;
-    let existingCartItem: CartItem | null = null;
+    let existingCartItem: CartItem | undefined = undefined;
 
     
     if(this.cartItems.length>0){
-      //根据id找item
-      for(let tempCartItem of this.cartItems){
-        if(tempCartItem.id===theCartItem.id){
-          existingCartItem=tempCartItem;
-          break;
-        }
-      }
+      //根据id找item,找到了就返回第一个，找不到返回undefined
+      existingCartItem=this.cartItems.find(tempCartItem=>tempCartItem.id===theCartItem.id);
+
+
       //检测是否找到了
       alreadyExistsInCart=(existingCartItem!=null);
     }
@@ -41,7 +38,16 @@ export class CartService {
     
   }
   computeCartTotals(){
-    throw new Error("Method not implemented");
+    let tatalPriceValue:number=0;
+    let totalQuantityValue:number=0;
+
+    for(let currentCartItem of this.cartItems){
+      tatalPriceValue+=currentCartItem.quantity*currentCartItem.unitPrice;
+      totalQuantityValue+=currentCartItem.quantity;
+    }
+
+    this.totalPrice.next(tatalPriceValue); //next()方法是Subject的一部分，用于向所有订阅者（subscribers）发送新的值
+    this.totalQuantity.next(totalQuantityValue);
     
   }
 }

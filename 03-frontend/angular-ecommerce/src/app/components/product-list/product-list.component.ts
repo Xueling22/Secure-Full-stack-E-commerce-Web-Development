@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -24,7 +26,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService:CartService
   ) {}
 
   ngOnInit(): void {
@@ -97,8 +100,9 @@ export class ProductListComponent implements OnInit {
       this.theTotalElements = data.page.totalElements;
     };
   }
-
+//点了谁，传进来谁，add进cart
   addToCart(theProduct:Product){
-    console.log("点了");
+    const theCartItem=new CartItem(theProduct);
+    this.cartService.addToCart(theCartItem);
   }
 }
