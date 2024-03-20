@@ -50,4 +50,23 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
     
   }
+
+  decrementQuantity(theCartItem: CartItem) {
+    theCartItem.quantity--;
+    if(theCartItem.quantity===0){
+      this.remove(theCartItem);
+    }else{
+      this.computeCartTotals();
+    }
+  }
+  remove(theCartItem: CartItem) {
+    const itemIndex=this.cartItems.findIndex(tempCartItem=>tempCartItem.id===theCartItem.id)
+
+    if(itemIndex>-1){
+      this.cartItems.splice(itemIndex,1); //第一个参数是要开始删除的项目的索引位置，第二个参数是要删除的项目数量。因此，splice(itemIndex, 1)表示从cartItems数组中移除位于itemIndex位置的1个元素
+      this.computeCartTotals();
+    }
+  }
+
+
 }

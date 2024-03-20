@@ -11,8 +11,13 @@ import { SearchComponent } from './components/search/search.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes=[
+  {path:'checkout',component:CheckoutComponent},
+  {path:'cart-details',component:CartDetailsComponent},
   {path:'products/:id',component:ProductDetailsComponent},
   {path:'search/:keyword',component:ProductListComponent},
   {path: 'category/:id',component:ProductListComponent}, //path就是路径，后者是新建一个实例，参数id传递给该组件，这样你就可以在组件内部获取并使用这个值
@@ -29,13 +34,16 @@ const routes: Routes=[
     ProductCategoryMenuComponent,
     SearchComponent,
     ProductDetailsComponent,
-    CartStatusComponent
+    CartStatusComponent,
+    CartDetailsComponent,
+    CheckoutComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
