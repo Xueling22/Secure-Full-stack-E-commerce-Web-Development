@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root', //root means globally全局单例
