@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
 
 @Injectable({
@@ -8,8 +8,9 @@ import { CartItem } from '../common/cart-item';
 export class CartService {
 
   cartItems: CartItem[]=[];
-  totalPrice:Subject<number>=new Subject<number>(); //subject是observable的子类，可以发布事件，给所有的subscribes
-  totalQuantity:Subject<number>=new Subject<number>();
+  totalPrice:Subject<number>=new BehaviorSubject<number>(0); //subject是observable的子类，可以发布事件，给所有的subscribes
+  totalQuantity:Subject<number>=new BehaviorSubject<number>(0);
+  //0是这两个BehaviorSubject的初始值。这意味着，当你第一次订阅（subscribe）这个BehaviorSubject时，它会立即发出（emit）这个初始值给订阅者。这是BehaviorSubject与普通Subject的一个主要区别——BehaviorSubject需要一个初始值，并且总是会向新的订阅者发出其最新的值，即使是在订阅之后才发出的值
 
   constructor() { }
 
